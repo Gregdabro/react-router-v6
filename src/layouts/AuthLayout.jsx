@@ -1,7 +1,7 @@
 import React from "react";
 // Librares
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 // import { useRouteMatch } from "react-router-dom";
 // Components
 import Card from "../components/Card";
@@ -13,7 +13,7 @@ const AuthLayout = () => {
     const isLoggedIn = useSelector(isLoggedInSelector());
 
     if (isLoggedIn) {
-        // return <Redirect to='/' />;
+        return <Navigate to='/' />;
     }
 
     return (

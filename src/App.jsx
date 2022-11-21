@@ -8,7 +8,7 @@ import NavBar from "./components/NavBar/NavBar";
 import withRedux from "./hoc/withRedux";
 import withRouter from "./hoc/withRouter";
 import "react-toastify/dist/ReactToastify.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import PostsLayout from "./layouts/PostsLayout";
 import PostPage from "./pages/Posts/PostPage";
 import PostsListPage from "./pages/Posts/PostsListPage";
@@ -22,16 +22,18 @@ function App() {
             <Routes>
                 <Route index element={<MainPage/>} />
                 <Route path='auth' element={<AuthLayout/>} >
+                    <Route index element={<Navigate to="/auth/signUp"/>}/>
                     <Route path={"login"} element={<LoginPage/>} />
                     <Route path={"signup"} element={<SignUpPage/>} />
+                    <Route path="*" element={<Navigate to="/auth/signUp"/>}/>
+
                 </Route>
                 <Route path='posts/*' element={<PostsLayout/>} >
                     <Route path=":postId" element={<PostPage/>} />
                     <Route index element={<PostsListPage/>} />
                 </Route>
-                {/*<Redirect from='*' to='/' />*/}
+                <Route path="*" element={ <Navigate to="/posts"/> }/>
             </Routes>
-
             <ToastContainer />
         </div>
     );
