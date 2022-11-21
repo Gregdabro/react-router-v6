@@ -10,15 +10,25 @@ import withRouter from "./hoc/withRouter";
 import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes } from "react-router-dom";
 import PostsLayout from "./layouts/PostsLayout";
+import PostPage from "./pages/Posts/PostPage";
+import PostsListPage from "./pages/Posts/PostsListPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SigupPage";
 
 function App() {
     return (
         <div className='min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-150 flex flex-col'>
             <NavBar />
             <Routes>
-                <Route path='' element={<MainPage/>} />
-                <Route path='auth/*' element={<AuthLayout/>} />
-                <Route path='posts/*' element={<PostsLayout/>} />
+                <Route index element={<MainPage/>} />
+                <Route path='auth' element={<AuthLayout/>} >
+                    <Route path={"login"} element={<LoginPage/>} />
+                    <Route path={"signup"} element={<SignUpPage/>} />
+                </Route>
+                <Route path='posts/*' element={<PostsLayout/>} >
+                    <Route path=":postId" element={<PostPage/>} />
+                    <Route index element={<PostsListPage/>} />
+                </Route>
                 {/*<Redirect from='*' to='/' />*/}
             </Routes>
 
