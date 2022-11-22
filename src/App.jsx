@@ -1,10 +1,8 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import AuthLayout from "./layouts/AuthLayout";
-// import PostsLayout from "./layouts/PostsLayout";
 import MainPage from "./pages/MainPage";
 import NavBar from "./components/NavBar/NavBar";
-// import ProtectedRoute from "./components/ProtectedRoute";
 import withRedux from "./hoc/withRedux";
 import withRouter from "./hoc/withRouter";
 import "react-toastify/dist/ReactToastify.css";
