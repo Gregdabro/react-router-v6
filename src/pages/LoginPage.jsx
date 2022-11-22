@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // Librares
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik, FormikProvider } from "formik";
 // Store
@@ -31,6 +31,7 @@ const LoginPage = () => {
     const { message } = useSelector((state) => state.message);
     const navigate = useNavigate();
     // const history = useHistory();
+    const location = useLocation();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -40,14 +41,14 @@ const LoginPage = () => {
     const handleLogin = (formValue) => {
         const { username, password } = formValue;
         setLoading(true);
-        // const redirect = history.location.state
-        //     ? history.location.state.referrer.pathname
-        //     : null;
+        const redirect = location.state
+            ? location.state.referrer.pathname
+            : "/posts";
         dispatch(login({ username, password }))
             .unwrap()
             .then(() => {
-                navigate("/posts", {replace: true});
-                // history.push(redi rect || "/");
+                navigate(redirect, {replace: true});
+                // history.push(redirect || "/");
             })
             .catch(() => {
                 setLoading(false);
